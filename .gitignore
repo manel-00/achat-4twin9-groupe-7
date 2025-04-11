@@ -1,0 +1,32 @@
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.swp
+
+# IDE specific files (you can uncomment or add based on your IDE)
+#.idea/
+#*.iml
+#.vscode/
+#nbproject/
+
+# Operating system specific files
+.DS_Store
+Thumbs.db
+
+# Node.js (if you are using it)
+node_modules/
+
+# Python (if you are using it)
+__pycache__/
+*.pyc
+
+# Java (if you are using it)
+*.class
+target/
+bin/
+
+# Frontend build directories (adjust based on your framework)
+build/
+dist/
