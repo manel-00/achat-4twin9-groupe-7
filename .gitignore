@@ -30,3 +30,6 @@ bin/
 # Frontend build directories (adjust based on your framework)
 build/
 dist/
+
+docker-compose.yml
+
