@@ -31,3 +31,13 @@ build/
 
 ### VS Code ###
 .vscode/
+# Ignorer les images Docker
+*.tar
+*.img
+
+# Ignorer le dossier .docker
+.docker/
+
+# Ignorer docker-compose.yml
+docker-compose.yml
+
