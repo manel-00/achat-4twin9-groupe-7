@@ -16,9 +16,11 @@ export class ProductsComponent implements OnInit {
   closeResult!: string;
 
   constructor(private productService: ProductService, private modalService: NgbModal) {
+    console.log('ProductsComponent initialized');
   }
 
   ngOnInit(): void {
+    console.log('ngOnInit called');
     this.getAllProducts();
 
     this.product = {
@@ -28,52 +30,98 @@ export class ProductsComponent implements OnInit {
       prix: null,
       dateCreation: null,
       dateDerniereModification: null
-
-    }
+    };
+    console.log('Initial product object:', this.product);
   }
 
   getAllProducts() {
-    this.productService.getAllProducts().subscribe(res => this.listProducts = res)
+    console.log('Fetching all products...');
+    this.productService.getAllProducts().subscribe(
+      res => {
+        this.listProducts = res;
+        console.log('Products fetched successfully:', this.listProducts);
+      },
+      err => {
+        console.error('Error fetching products:', err);
+      }
+    );
   }
 
   addProduct(p: any) {
-    this.productService.addProduct(p).subscribe(() => {
-      this.getAllProducts();
-      this.form = false;
-    });
+    console.log('Adding product:', p);
+    this.productService.addProduct(p).subscribe(
+      () => {
+        console.log('Product added successfully');
+        this.getAllProducts();
+        this.form = false;
+      },
+      err => {
+        console.error('Error adding product:', err);
+      }
+    );
   }
 
   editProduct(product: Product) {
-    this.productService.editProduct(product).subscribe();
+    console.log('Editing product:', product);
+    this.productService.editProduct(product).subscribe(
+      () => {
+        console.log('Product edited successfully');
+      },
+      err => {
+        console.error('Error editing product:', err);
+      }
+    );
   }
 
   deleteProduct(idProduct: any) {
-    this.productService.deleteProduct(idProduct).subscribe(() => this.getAllProducts())
+    console.log('Deleting product with ID:', idProduct);
+    this.productService.deleteProduct(idProduct).subscribe(
+      () => {
+        console.log('Product deleted successfully');
+        this.getAllProducts();
+      },
+      err => {
+        console.error('Error deleting product:', err);
+      }
+    );
   }
 
   open(content: any, action: any) {
-    if (action != null)
-      this.product = action
-    else
+    console.log('Opening modal...');
+    if (action != null) {
+      this.product = action;
+      console.log('Editing existing product:', this.product);
+    } else {
       this.product = new Product();
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+      console.log('Creating new product');
+    }
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then(
+      (result) => {
+        this.closeResult = `Closed with: ${result}`;
+        console.log('Modal closed with result:', result);
+      },
+      (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        console.log('Modal dismissed:', this.closeResult);
+      }
+    );
   }
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
+      console.log('Modal dismissed by pressing ESC');
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      console.log('Modal dismissed by clicking on a backdrop');
       return 'by clicking on a backdrop';
     } else {
+      console.log('Modal dismissed with reason:', reason);
       return `with: ${reason}`;
     }
   }
 
   cancel() {
+    console.log('Cancel action triggered');
     this.form = false;
   }
 }
