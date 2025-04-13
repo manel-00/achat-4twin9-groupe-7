@@ -35,6 +35,7 @@ public class ProduitServiceImpl implements IProduitService {
 	@Transactional
 	public Produit addProduit(Produit p) {
 		produitRepository.save(p);
+		log.info("Product added: {}", p);
 		return p;
 	}
 
