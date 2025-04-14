@@ -1,0 +1,22 @@
+# Java (Spring Boot)
+*.class
+*.jar
+*.war
+*.log
+target/
+.idea/
+*.iml
+
+# Node (Angular)
+node_modules/
+dist/
+*.log
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Maven
+*.mvn
+.mvn/
+
