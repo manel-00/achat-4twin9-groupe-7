@@ -20,6 +20,9 @@ Thumbs.db
 *.mvn
 .mvn/
 
+backend/Dockerfile
+frontend/Dockerfile
+
 # Ignore docker-compose.yml
 docker-compose.yml
 
