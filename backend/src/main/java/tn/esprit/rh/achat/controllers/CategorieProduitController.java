@@ -1,5 +1,7 @@
 package tn.esprit.rh.achat.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,8 @@ import java.util.List;
 @Api(tags = "Gestion des categories Produit")
 @RequestMapping("/categorieProduit")
 public class CategorieProduitController {
+
+	private static final Logger logger = LoggerFactory.getLogger(CategorieProduitServiceImpl.class);
 
 	@Autowired
 	ICategorieProduitService categorieProduitService;
@@ -36,6 +40,7 @@ public class CategorieProduitController {
 	@ResponseBody
 	public CategorieProduit addCategorieProduit(@RequestBody CategorieProduit cp) {
 		CategorieProduit categorieProduit = categorieProduitService.addCategorieProduit(cp);
+		logger.info("Adding new category product: {}", cp.getLibelleCategorie());
 		return categorieProduit;
 	}
 
