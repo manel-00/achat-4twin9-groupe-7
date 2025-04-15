@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  achat-backend:
+    image: achat-backend-manelfatnassi-4twin9
+    ports:
+      - "8089:8089"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/achatdb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: your_mysql_password
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: your_mysql_password
+      MYSQL_DATABASE: achatdb
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  achat-frontend:
+    image: achat-frontend-manelfatnassi-4twin9 # Use the image name you've been trying to build
+    ports:
+      - "82:80" # Map the host port 82 to the container's port 80 (Nginx default)
+    # If your frontend needs to communicate with the backend, you can link them:
+    # depends_on:
+    #   - achat-backend
+    # environment:
+    #   API_BASE_URL: "http://achat-backend:8089" # Example environment variable for backend URL
+
+volumes:
+  mysql_data:
