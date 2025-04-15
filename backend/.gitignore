@@ -41,3 +41,10 @@ build/
 # Ignorer docker-compose.yml
 docker-compose.yml
 
+# Ignore Docker files
+.docker/
+Dockerfile
+
+# Ignore Node.js files
+node_modules/
+dist/
