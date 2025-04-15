@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+
+    environment {
+        MAVEN_HOME = '/opt/maven' // adapt if needed
+    }
+
+    stages {
+        stage('Clone') {
+            steps {
+                echo 'Cloning repository...'
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Building backend with Maven...'
+                sh 'cd backend && mvn clean install'
+            }
+        }
+
+        stage('Tests') {
+            steps {
+                echo 'Running tests...'
+                sh 'cd backend && mvn test'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                echo 'Packaging the app...'
+                sh 'cd backend && mvn package'
+            }
+        }
+    }
+}
+
